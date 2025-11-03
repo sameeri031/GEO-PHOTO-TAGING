@@ -337,7 +337,7 @@ namespace Task1
         private void button8_Click(object sender, EventArgs e)
         {
             groupBox1.Visible = false;
-            var f = new SEARCH();
+            var f = new SEARCH(allImages, metadataCache);
             f.Show();
         }
 

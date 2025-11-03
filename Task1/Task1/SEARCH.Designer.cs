@@ -164,6 +164,7 @@
             linkLabel1.TabIndex = 28;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "SYNC";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // label1
             // 

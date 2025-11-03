@@ -197,8 +197,7 @@ namespace Task1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var form = new LOCATION();
-            form.Show();
+
 
 
         }
@@ -211,20 +210,17 @@ namespace Task1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var form = new Event();
-            form.Show();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var form = new DATE();
-            form.Show();
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            var f = new SEARCH();
-            f.Show();
+
         }
 
         private void button9_Click(object sender, EventArgs e)

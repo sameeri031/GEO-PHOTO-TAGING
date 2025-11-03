@@ -20,7 +20,11 @@ namespace Task1
         private System.Timers.Timer searchDelayTimer;
         string query = "";
 
-        public SEARCH()
+        private Dictionary<string, dynamic> metadataCache = new();
+
+        private List<string> allImages = new List<string>();
+
+        public SEARCH(List<string> allImages, Dictionary<string, dynamic> metadataCache)
         {
             InitializeComponent();
             this.Text = "GEO PHOTO TAGGING";
@@ -33,6 +37,8 @@ namespace Task1
                 // Use BeginInvoke to safely call UI code
                 this.BeginInvoke(new Action(async () => await PerformSearch()));
             };
+            this.allImages = allImages;
+            this.metadataCache = metadataCache;
         }
 
         private async void textBox1_TextChanged(object sender, EventArgs e)
@@ -92,7 +98,7 @@ namespace Task1
             flowLayoutPanel1.Controls.Clear();
             matchedMetadata.Clear();
 
-            var allImages = await GetServerImagesAsync();
+
             if (allImages.Count == 0)
             {
                 MessageBox.Show("No images found on server!");
@@ -102,14 +108,36 @@ namespace Task1
             foreach (var filename in allImages)
             {
                 string imageUrl = baseUrl + filename;
-                string metaJson = await GetMetadataAsync(imageUrl);
-                if (!string.IsNullOrWhiteSpace(metaJson))
+                //********************
+                if (metadataCache.ContainsKey(imageUrl))
                 {
-                    dynamic meta = JsonConvert.DeserializeObject(metaJson);
-                    string searchable = $"{meta.Person} {meta.Event} {meta.Location} {meta.Date}".ToLower();
+                    dynamic cachedMeta = metadataCache[imageUrl];
+                    try
+                    {
+                        string searchable = $"{cachedMeta.Person} {cachedMeta.Event} {cachedMeta.Location} {cachedMeta.Date}".ToLower();
 
-                    if (searchable.Contains(query))
-                        matchedMetadata.Add((imageUrl, meta));
+                        if (searchable.Contains(query))
+                            matchedMetadata.Add((imageUrl, cachedMeta));
+
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                }
+                else
+                {
+
+
+                    //*********************88
+
+                    string metaJson = await GetMetadataAsync(imageUrl);
+                    if (!string.IsNullOrWhiteSpace(metaJson))
+                    {
+                        dynamic meta = JsonConvert.DeserializeObject(metaJson);
+                        string searchable = $"{meta.Person} {meta.Event} {meta.Location} {meta.Date}".ToLower();
+
+                        if (searchable.Contains(query))
+                            matchedMetadata.Add((imageUrl, meta));
+                        metadataCache[imageUrl] = meta;
+                    }
                 }
             }
 
@@ -134,7 +162,7 @@ namespace Task1
             flowLayoutPanel1.Controls.Clear();
             matchedMetadata.Clear();
 
-            var allImages = await GetServerImagesAsync();
+            // var allImages = await GetServerImagesAsync();
             if (allImages.Count == 0)
             {
                 MessageBox.Show("No images found on server!");
@@ -278,44 +306,58 @@ namespace Task1
                 flowLayoutPanel1.Controls.Add(imgPanel);
             }
         }
-
-        private void PEOPLE_Click(object sender, EventArgs e)
-        {
-
-            flowLayoutPanel1.Controls.Clear();
-            var filtered = matchedMetadata
-                .Where(x => x.Meta.Person != null && x.Meta.Person.ToString().ToLower().Contains(textBox1.Text.ToLower()))
-                .Select(x => x.Url)
-                .ToList();
-            if (filtered.Count == 0)
-                MessageBox.Show("No  related person on server!");
-            DisplayImages(filtered);
-        }
-
-        private void EVENT_Click(object sender, EventArgs e)
+        private void PEOPLE_Click(object sender, EventArgs e) => FilterByField("Person");
+        private void EVENT_Click(object sender, EventArgs e) => FilterByField("Event");
+        private void location_Click(object sender, EventArgs e) => FilterByField("Location");
+        private void FilterByField(string field)
         {
             flowLayoutPanel1.Controls.Clear();
             var filtered = matchedMetadata
-                .Where(x => x.Meta.Event != null && x.Meta.Event.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                .Where(x => (x.Meta[field] ?? "").ToString().ToLower().Contains(textBox1.Text.ToLower()))
                 .Select(x => x.Url)
                 .ToList();
-            if (filtered.Count == 0)
-                MessageBox.Show("No related event on server!");
-            DisplayImages(filtered);
 
-        }
-
-        private void location_Click(object sender, EventArgs e)
-        {
-            flowLayoutPanel1.Controls.Clear();
-            var filtered = matchedMetadata
-                .Where(x => x.Meta.Location != null && x.Meta.Location.ToString().ToLower().Contains(textBox1.Text.ToLower()))
-                .Select(x => x.Url)
-                .ToList();
             if (filtered.Count == 0)
-                MessageBox.Show("No related location on server!");
+                MessageBox.Show($"No related {field} on server!");
             DisplayImages(filtered);
         }
+        //private void PEOPLE_Click(object sender, EventArgs e)
+        //{
+
+        //    flowLayoutPanel1.Controls.Clear();
+        //    var filtered = matchedMetadata
+        //        .Where(x => x.Meta.Person != null && x.Meta.Person.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+        //        .Select(x => x.Url)
+        //        .ToList();
+        //    if (filtered.Count == 0)
+        //        MessageBox.Show("No  related person on server!");
+        //    DisplayImages(filtered);
+        //}
+
+        //private void EVENT_Click(object sender, EventArgs e)
+        //{
+        //    flowLayoutPanel1.Controls.Clear();
+        //    var filtered = matchedMetadata
+        //        .Where(x => x.Meta.Event != null && x.Meta.Event.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+        //        .Select(x => x.Url)
+        //        .ToList();
+        //    if (filtered.Count == 0)
+        //        MessageBox.Show("No related event on server!");
+        //    DisplayImages(filtered);
+
+        //}
+
+        //private void location_Click(object sender, EventArgs e)
+        //{
+        //    flowLayoutPanel1.Controls.Clear();
+        //    var filtered = matchedMetadata
+        //        .Where(x => x.Meta.Location != null && x.Meta.Location.ToString().ToLower().Contains(textBox1.Text.ToLower()))
+        //        .Select(x => x.Url)
+        //        .ToList();
+        //    if (filtered.Count == 0)
+        //        MessageBox.Show("No related location on server!");
+        //    DisplayImages(filtered);
+        //}
 
         private void SHOWALL_Click(object sender, EventArgs e)
         {
@@ -329,7 +371,9 @@ namespace Task1
             this.Close();
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
-
+        }
     }
 }

@@ -71,8 +71,7 @@ namespace Task1
 
         private void button8_Click_1(object sender, EventArgs e)
         {
-            var f = new SEARCH();
-            f.Show();
+
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

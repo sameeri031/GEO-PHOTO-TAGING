@@ -531,8 +531,7 @@ namespace Task1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var form = new LOCATION();
-            form.Show();
+
 
         }
 
