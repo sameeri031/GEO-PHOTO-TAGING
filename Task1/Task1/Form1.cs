@@ -224,7 +224,7 @@ namespace Task1
             var uploadTasks = selectedImages.Select(imagePath => UploadSinglePhotoAsync(imagePath)).ToList();
             await Task.WhenAll(uploadTasks);
 
-            MessageBox.Show(" All photos auto-uploaded successfully!");
+            // MessageBox.Show(" All photos auto-uploaded successfully!");
         }
         private static readonly HttpClient client = new HttpClient();
 

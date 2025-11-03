@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dogesh\\source\\repos\\Task1\\Task1\\Task1.csproj": {}
+    "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Task1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dogesh\\source\\repos\\Task1\\Task1\\Task1.csproj": {
+    "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Task1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dogesh\\source\\repos\\Task1\\Task1\\Task1.csproj",
+        "projectUniqueName": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Task1.csproj",
         "projectName": "Task1",
-        "projectPath": "C:\\Users\\Dogesh\\source\\repos\\Task1\\Task1\\Task1.csproj",
+        "projectPath": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Task1.csproj",
         "packagesPath": "C:\\Users\\Dogesh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dogesh\\source\\repos\\Task1\\Task1\\obj\\",
+        "outputPath": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
