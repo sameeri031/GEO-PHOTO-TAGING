@@ -365,8 +365,70 @@ namespace Task1
 
         private async void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            allImages = await GetServerImagesAsync();
+            try
+            {
+               
+
+                // 1️⃣ Reload all image filenames from server
+                allImages = await GetServerImagesAsync();
+
+                if (allImages.Count == 0)
+                {
+                    MessageBox.Show("No images found on server!");
+                    linkLabel1.Text = "Refresh Metadata";
+                    linkLabel1.Enabled = true;
+                    return;
+                }
+
+                // 2️⃣ Clear the cache and rebuild it fresh
+                metadataCache.Clear();
+
+                using (HttpClient client = new HttpClient())
+                {
+                    foreach (var filename in allImages)
+                    {
+                        try
+                        {
+                            string apiUrl = $"http://127.0.0.1:8000/get_metadata?filename={filename}";
+                            var response = await client.GetAsync(apiUrl);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                string json = await response.Content.ReadAsStringAsync();
+                                if (!string.IsNullOrWhiteSpace(json))
+                                {
+                                    dynamic meta = JsonConvert.DeserializeObject(json);
+                                    if (meta != null)
+                                        metadataCache[$"http://127.0.0.1:8000/photos/{filename}"] = meta;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Just skip broken images instead of stopping the loop
+                            Console.WriteLine($"Failed to update metadata for {filename}: {ex.Message}");
+                        }
+                    }
+                }
+
+                // 3️⃣ Optionally refresh current albums UI
+                MessageBox.Show("✅ Metadata successfully updated from server!");
+                
+
+                // optional: reload albums automatically
+                await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing metadata: " + ex.Message);
+               
+            }
+            finally
+            {
+              
+            }
         }
+
 
         //private void button5_Click(object sender, EventArgs e)
         //{
