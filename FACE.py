@@ -38,6 +38,8 @@ def get_db_connection():
     )
 
 
+CHANGED_FILE = "changed_photos.json" 
+DELETED_FILE = "deleted_photos.json" 
 
 PHOTO_FOLDER = r"C:\Users\Dogesh\Desktop\PHOTO_SERVER"
 identified_persons = ""
@@ -320,6 +322,7 @@ async def upload_photo(file: UploadFile = File(...), metadata: str = Form(None))
 
         filename = os.path.basename(file.filename)
         save_path = os.path.join(server_folder, filename)
+        add_changed_photo(save_path)
 
         # Save the uploaded file first
         contents = await file.read()
@@ -359,6 +362,7 @@ async def upload_photo(file: UploadFile = File(...), metadata: str = Form(None))
 @app.post("/update_metadata")
 async def update_metadata(filename: str = Form(...), metadata: str = Form(...)):
     path = os.path.join(PHOTO_FOLDER, filename)
+    add_changed_photo(path)
     if not os.path.exists(path):
         return {"error": "file not found"}
 
@@ -435,7 +439,7 @@ async def get_metadata(filename: str):
 @app.post("/delete_photo")
 async def delete_photo(filename: str = Form(...), title: str = Form(...)):
     path = os.path.join(PHOTO_FOLDER, filename)
-
+    add_deleted_photo(filename)
     if not os.path.exists(path):
         return {"error": "file not found"}
 
@@ -475,6 +479,7 @@ async def upload_photo_MODEL(
 
     filename = os.path.basename(file.filename)
     save_path = os.path.join(server_folder, filename)
+    add_changed_photo(save_path)
 
     contents = await file.read()
     with open(save_path, "wb") as f:
@@ -953,3 +958,138 @@ async def update(
     finally:
         if conn:
             conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ... (Baaki code)
+
+
+def add_changed_photo(absolute_path):
+    # 💥 CRITICAL FIX: Extract relative path or just the filename
+    
+    # 1. Filename extraction (agar aapki saari photos ROOT_DIR mein hain):
+    relative_path = os.path.basename(absolute_path) # Sirf "WhatsApp Image 2025-..." milega
+    
+    # 2. Agar photos sub-folders mein hain, toh relative path nikaalein:
+    # relative_path = os.path.relpath(absolute_path, ROOT_DIR) # "folder/photo.jpg" milega
+    
+    filename_to_store = relative_path # Ya to basename ya relative path
+    
+    try:
+        with open(CHANGED_FILE, "r") as f:
+            data = json.load(f)
+    except:
+        data = []
+
+    if filename_to_store not in data: # Check only the filename/relative path
+        data.append(filename_to_store)
+
+    with open(CHANGED_FILE, "w") as f:
+        json.dump(data, f)
+# Is function ko call karte waqt ensure karein ki aapne yahan path correction kiya hai.
+
+
+
+
+@app.get("/changed_photos")
+def get_changed_photos():
+    try:
+        with open(CHANGED_FILE, "r") as f:
+            data = json.load(f)
+        return data
+    except:
+        return []
+    
+
+# ... (existing imports and code)
+
+@app.post("/clear_changed_photos")
+def clear_changed_photos():
+    """Server-side list of changed photos ko reset karta hai."""
+    global CHANGED_FILE
+    try:
+        # File ko khaali list se overwrite kar dein
+        with open(CHANGED_FILE, "w") as f:
+            json.dump([], f)
+        print("✅ CHANGED_FILE list cleared.")
+        return {"status": "success", "message": "Changed photos list cleared."}
+    except Exception as e:
+        print(f"💥 Error clearing CHANGED_FILE: {e}")
+        return {"status": "error", "message": str(e)}
+
+# ... (rest of your FastAPI code)
+
+
+def add_deleted_photo(filename: str):
+    """
+    Jab koi file delete hoti hai, toh yeh function uska filename DELETED_FILE mein add karta hai.
+    (Isko aapke file monitoring system se call hona chahiye)
+    """
+    try:
+        if os.path.exists(DELETED_FILE):
+            with open(DELETED_FILE, "r") as f:
+                data = json.load(f)
+        else:
+            data = []
+    except json.JSONDecodeError:
+        data = []
+
+    # Ensure ki path sirf filename ho, jaisa ki aapke client mein sync hota hai
+    # agar aapka monitoring absolute path de raha hai toh use Path.basename se theek karein.
+    base_filename = os.path.basename(filename) 
+    
+    if base_filename not in data:
+        data.append(base_filename)
+
+    with open(DELETED_FILE, "w") as f:
+        json.dump(data, f)
+    print(f"✅ Logged deletion: {base_filename}")
+
+
+# --- API ENDPOINTS FOR DELETION SYNC ---
+
+@app.get("/deleted_photos")
+def get_deleted_photos():
+    """
+    Client ko deleted photos ki list (filenames) bhejta hai.
+    """
+    try:
+        if os.path.exists(DELETED_FILE):
+            with open(DELETED_FILE, "r") as f:
+                data = json.load(f)
+            return data
+        else:
+            return []
+    except json.JSONDecodeError:
+        print(f"⚠️ Warning: {DELETED_FILE} is corrupted or empty.")
+        return []
+    except Exception as e:
+        print(f"💥 Error reading deleted photos file: {e}")
+        return {"status": "error", "message": str(e)}
+
+@app.post("/clear_deleted_photos")
+def clear_deleted_photos():
+    """
+    Client sync hone ke baad server se deletion list ko reset karta hai.
+    """
+    try:
+        # File ko khaali list se overwrite kar dein
+        with open(DELETED_FILE, "w") as f:
+            json.dump([], f)
+        print("✅ DELETED_FILE list cleared.")
+        return {"status": "success", "message": "Deleted photos list cleared."}
+    except Exception as e:
+        print(f"💥 Error clearing DELETED_FILE: {e}")
+        return {"status": "error", "message": str(e)}

@@ -306,9 +306,19 @@ namespace Task1
                 flowLayoutPanel1.Controls.Add(imgPanel);
             }
         }
-        private void PEOPLE_Click(object sender, EventArgs e) => FilterByField("Person");
-        private void EVENT_Click(object sender, EventArgs e) => FilterByField("Event");
-        private void location_Click(object sender, EventArgs e) => FilterByField("Location");
+        private void PEOPLE_Click(object sender, EventArgs e)
+        {
+            label7.Text = "PEOPLE RELATED SEARCH RESULT";
+            FilterByField("Person");
+        }
+        private void EVENT_Click(object sender, EventArgs e)
+        {
+            label7.Text = "EVENT RELATED SEARCH RESULT"; FilterByField("Event");
+        }
+        private void location_Click(object sender, EventArgs e)
+        {
+            label7.Text = "LOCATION RELATED SEARCH RESULT"; FilterByField("Location");
+        }
         private void FilterByField(string field)
         {
             flowLayoutPanel1.Controls.Clear();
@@ -361,6 +371,7 @@ namespace Task1
 
         private void SHOWALL_Click(object sender, EventArgs e)
         {
+            label7.Text = "ALL SEARCH RESULT";
             flowLayoutPanel1.Controls.Clear();
             currentFiltered = matchedMetadata.Select(x => x.Url).ToList();
             DisplayImages(currentFiltered);
@@ -372,6 +383,11 @@ namespace Task1
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

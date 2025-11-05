@@ -11,44 +11,44 @@
       "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\autoupload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|c:\\users\\dogesh\\desktop\\server\\task1\\task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\albumview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{028B1C20-3295-46D5-BF41-A185DD830CC3}|Task1\\Task1.csproj|solutionrelative:task1\\picturedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,7 +66,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Form1.cs",
               "RelativeDocumentMoniker": "Task1\\Form1.cs",
@@ -78,33 +78,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Form1.cs",
               "RelativeDocumentMoniker": "Task1\\Form1.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\Form1.cs",
               "RelativeToolTip": "Task1\\Form1.cs",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAkwBAAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACwCAAAAAAAAAAAgwDECAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T14:34:36.587Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AUTOUPLOAD.cs",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AUTOUPLOAD.cs",
               "RelativeDocumentMoniker": "Task1\\AUTOUPLOAD.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AUTOUPLOAD.cs",
               "RelativeToolTip": "Task1\\AUTOUPLOAD.cs",
-              "ViewState": "AgIAAKgAAAAAAAAAAAAzwIoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAkwLQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-05T07:48:23.347Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "AUTOUPLOAD.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AUTOUPLOAD.cs",
               "RelativeDocumentMoniker": "Task1\\AUTOUPLOAD.cs",
@@ -134,14 +134,14 @@
               "RelativeDocumentMoniker": "Task1\\ALBUM.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\ALBUM.cs",
               "RelativeToolTip": "Task1\\ALBUM.cs",
-              "ViewState": "AgIAAPIBAAAAAAAAAAAowBYEAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAG0BAAAAAAAAAAAIwHkBAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T15:26:21.676Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "picturedetail.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\picturedetail.cs",
               "RelativeDocumentMoniker": "Task1\\picturedetail.cs",
@@ -153,57 +153,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "picturedetail.cs",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\picturedetail.cs",
               "RelativeDocumentMoniker": "Task1\\picturedetail.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\picturedetail.cs",
               "RelativeToolTip": "Task1\\picturedetail.cs",
-              "ViewState": "AgIAAGkBAAAAAAAAAAAmwMcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFsBAAAAAAAAAAAswGoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-19T16:58:26.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 7,
               "Title": "SEARCH.cs",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\SEARCH.cs",
               "RelativeDocumentMoniker": "Task1\\SEARCH.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\SEARCH.cs",
               "RelativeToolTip": "Task1\\SEARCH.cs",
-              "ViewState": "AgIAAG0BAAAAAAAAAAAqwHcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAG4BAAAAAAAAAAAewHUBAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T16:35:34.428Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "SEARCH.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\SEARCH.cs",
               "RelativeDocumentMoniker": "Task1\\SEARCH.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\SEARCH.cs [Design]",
               "RelativeToolTip": "Task1\\SEARCH.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:33:48.47Z"
+              "WhenOpened": "2025-10-22T16:33:48.47Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AlbumView.cs",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AlbumView.cs",
               "RelativeDocumentMoniker": "Task1\\AlbumView.cs",
               "ToolTip": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AlbumView.cs",
               "RelativeToolTip": "Task1\\AlbumView.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAkwEkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T15:11:41.239Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "AlbumView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Dogesh\\Desktop\\SERVER\\Task1\\Task1\\AlbumView.cs",
               "RelativeDocumentMoniker": "Task1\\AlbumView.cs",

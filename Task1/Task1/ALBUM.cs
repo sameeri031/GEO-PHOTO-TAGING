@@ -365,72 +365,221 @@ namespace Task1
         {
 
         }
-
         private async void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
+            var deletedPhotos = await GetDeletedPhotosFromServer();
+            var changedPhotos = await GetChangedPhotosFromServer();
+            if (changedPhotos.Count == 0 && deletedPhotos.Count == 0)
             {
+                MessageBox.Show("No new changes to sync!");
+                return;
+            }
 
+            string baseUrl = "http://127.0.0.1:8000/photos/";
 
-                // 1️⃣ Reload all image filenames from server
-                allImages = await GetServerImagesAsync();
+            foreach (var absolutePath in changedPhotos)
+            {
+                string photoFilename = Path.GetFileName(absolutePath);
 
-                if (allImages.Count == 0)
+                // Full URL banao (jo ab correct hoga)
+                string imageUrl = baseUrl + photoFilename;
+
+                // New photo case
+                if (!allImages.Contains(photoFilename)) // Check the filename only
                 {
-                    MessageBox.Show("No images found on server!");
-                    linkLabel1.Text = "Refresh Metadata";
-                    linkLabel1.Enabled = true;
-                    return;
+                    allImages.Add(photoFilename); // Store the filename only
                 }
-
-                // 2️⃣ Clear the cache and rebuild it fresh
-                metadataCache.Clear();
-
-                using (HttpClient client = new HttpClient())
+                else
                 {
-                    foreach (var filename in allImages)
-                    {
-                        try
-                        {
-                            string apiUrl = $"http://127.0.0.1:8000/get_metadata?filename={filename}";
-                            var response = await client.GetAsync(apiUrl);
+                    // Existing photo - Cache update
+                    // Cache key check ke liye abhi bhi full URL use hoga, 
+                    // lekin agar aapki initial cache keys mein bhi absolute path stored hain,
+                    // toh yeh thoda complex ho jaayega.
+                    // Assuming LoadAlbumsAsync ne cache mein sahi key (baseUrl + filename) dali thi.
 
-                            if (response.IsSuccessStatusCode)
-                            {
-                                string json = await response.Content.ReadAsStringAsync();
-                                if (!string.IsNullOrWhiteSpace(json))
-                                {
-                                    dynamic meta = JsonConvert.DeserializeObject(json);
-                                    if (meta != null)
-                                        metadataCache[$"http://127.0.0.1:8000/photos/{filename}"] = meta;
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            // Just skip broken images instead of stopping the loop
-                            Console.WriteLine($"Failed to update metadata for {filename}: {ex.Message}");
-                        }
+                    if (metadataCache.ContainsKey(imageUrl))
+                    {
+                        metadataCache.Remove(imageUrl);
+                        Console.WriteLine($"Cache invalidated for: {photoFilename}");
+                    }
+                    // Fetch and re-cache metadata
+                    await ExtractTagAsync(imageUrl, meta => (string)meta.Person ?? "");
+
+                }
+            }
+
+
+            // 🆕 Step 2: Process Deleted Photos
+            if (deletedPhotos.Count > 0)
+            {
+                foreach (var photoFilename in deletedPhotos)
+                {
+                    // allImages list se file name remove karein
+                    if (allImages.Remove(photoFilename))
+                    {
+                        Console.WriteLine($"Deleted photo removed from allImages: {photoFilename}");
+                    }
+
+                    // Metadata cache se bhi remove karein
+                    string imageUrl = "http://127.0.0.1:8000/photos/" + photoFilename;
+                    if (metadataCache.Remove(imageUrl))
+                    {
+                        Console.WriteLine($"Cache entry removed for deleted photo: {photoFilename}");
                     }
                 }
 
-                // 3️⃣ Optionally refresh current albums UI
-                MessageBox.Show("✅ Metadata successfully updated from server!");
-
-
-                // optional: reload albums automatically
-                await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
+                // Server ko batayein ki deletions sync ho gayi hain
+                await ClearDeletedPhotosFromServer(); // Naya function call
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error refreshing metadata: " + ex.Message);
+            MessageBox.Show("SYNC COMPLETED");
 
-            }
-            finally
-            {
+            // ... (rest of the code)
+            await ClearChangedPhotosFromServer();
 
+            MessageBox.Show("Sync Completed!");
+
+            await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
+        }
+
+        public async Task<List<string>> GetDeletedPhotosFromServer()
+        {
+            string url = "http://127.0.0.1:8000/deleted_photos";
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetStringAsync(url);
+                    return JsonConvert.DeserializeObject<List<string>>(response);
+                }
+                catch { return new List<string>(); }
             }
         }
+        public async Task<List<string>> GetChangedPhotosFromServer()
+        {
+            string url = "http://127.0.0.1:8000/changed_photos"; // apna server base url
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetStringAsync(url);
+                return JsonConvert.DeserializeObject<List<string>>(response);
+            }
+        }
+
+        public async Task ClearDeletedPhotosFromServer()
+        {
+            string url = "http://127.0.0.1:8000/clear_deleted_photos";
+            using (HttpClient client = new HttpClient())
+            {
+                await client.PostAsync(url, null);
+            }
+        }
+
+
+        public async Task ClearChangedPhotosFromServer()
+        {
+            string url = "http://127.0.0.1:8000/clear_changed_photos";
+            using (HttpClient client = new HttpClient())
+            {
+
+                await client.PostAsync(url, null);
+            }
+        }
+
+
+
+        //private async void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        //{
+        //    var changedPhotos = await GetChangedPhotosFromServer();
+
+        //    if (changedPhotos.Count == 0)
+        //    {
+        //        MessageBox.Show("No new changes to sync!");
+        //        return;
+        //    }
+
+        //    string baseUrl = "http://127.0.0.1:8000/photos/";
+
+        //    foreach (var photoFilename in changedPhotos)
+        //    {
+        //        string imageUrl = baseUrl + photoFilename;
+
+        //        // New photo case
+        //        if (!allImages.Contains(photoFilename))
+        //        {
+        //            allImages.Add(photoFilename);
+        //        }
+        //        else
+        //        {
+
+        //            if (metadataCache.ContainsKey(imageUrl))
+        //            {
+        //                metadataCache.Remove(imageUrl);
+        //                Console.WriteLine($"Cache invalidated for: {photoFilename}");
+        //            }
+
+        //            await ExtractTagAsync(imageUrl, meta => (string)meta.Person ?? "");
+        //        }
+        //    }
+
+        //    await ClearChangedPhotosFromServer();
+
+        //    MessageBox.Show("Sync Completed!");
+
+        //    await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
+        //}
+        //{
+        //    try
+        //    {
+
+
+        //        // 1️⃣ Reload all image filenames from server
+        //        allImages = await GetServerImagesAsync();
+
+        //        if (allImages.Count == 0)
+        //        {
+        //            MessageBox.Show("No images found on server!");
+        //            linkLabel1.Text = "Refresh Metadata";
+        //            linkLabel1.Enabled = true;
+        //            return;
+        //        }
+
+        //        // 2️⃣ Clear the cache and rebuild it fresh
+        //        metadataCache.Clear();
+
+        //        using (HttpClient client = new HttpClient())
+        //        {
+        //            foreach (var filename in allImages)
+        //            {
+        //                try
+        //                {
+        //                    string apiUrl = $"http://127.0.0.1:8000/get_metadata?filename={filename}";
+        //                    var response = await client.GetAsync(apiUrl);
+
+        //                    if (response.IsSuccessStatusCode)
+        //                    {
+        //                        string json = await response.Content.ReadAsStringAsync();
+        //                        if (!string.IsNullOrWhiteSpace(json))
+        //                        {
+        //                            dynamic meta = JsonConvert.DeserializeObject(json);
+        //                            if (meta != null)
+        //                                metadataCache[$"http://127.0.0.1:8000/photos/{filename}"] = meta;
+        //                        }
+        //                    }
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    // Just skip broken images instead of stopping the loop
+        //                    Console.WriteLine($"Failed to update metadata for {filename}: {ex.Message}");
+        //                }
+        //            }
+        //        }
+
+        //        // 3️⃣ Optionally refresh current albums UI
+        //        MessageBox.Show("✅ Metadata successfully updated from server!");
+
+
+        // optional: reload albums automatically
+        //    await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
+        //}
 
 
         //private void button5_Click(object sender, EventArgs e)

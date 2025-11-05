@@ -40,6 +40,7 @@
             linkLabel1 = new LinkLabel();
             label1 = new Label();
             label2 = new Label();
+            label7 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -190,12 +191,25 @@
             label2.TabIndex = 20;
             label2.Text = "FILTER";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.Black;
+            label7.Location = new Point(696, 92);
+            label7.Name = "label7";
+            label7.Size = new Size(206, 25);
+            label7.TabIndex = 45;
+            label7.Text = "SHOWING ALL RESULT";
+            label7.Click += label7_Click;
+            // 
             // SEARCH
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
             ClientSize = new Size(1924, 927);
+            Controls.Add(label7);
             Controls.Add(label2);
             Controls.Add(panel1);
             Controls.Add(button1);
@@ -232,5 +246,6 @@
         //private Button button3;
         private Label label2;
         private LinkLabel linkLabel1;
+        private Label label7;
     }
 }
