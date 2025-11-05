@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            label7 = new Label();
             label6 = new Label();
             button3 = new Button();
             button2 = new Button();
@@ -46,7 +47,6 @@
             panel1 = new Panel();
             linkLabel1 = new LinkLabel();
             label5 = new Label();
-            label7 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -78,6 +78,18 @@
             groupBox1.Size = new Size(1338, 757);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.DarkGreen;
+            label7.Location = new Point(156, 134);
+            label7.Name = "label7";
+            label7.Size = new Size(304, 25);
+            label7.TabIndex = 15;
+            label7.Text = "EXTRACTING FACES FRON IMAGE......";
+            label7.Visible = false;
             // 
             // label6
             // 
@@ -277,18 +289,6 @@
             label5.Size = new Size(129, 38);
             label5.TabIndex = 0;
             label5.Text = "UPLOAD";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.DarkGreen;
-            label7.Location = new Point(156, 134);
-            label7.Name = "label7";
-            label7.Size = new Size(304, 25);
-            label7.TabIndex = 15;
-            label7.Text = "EXTRACTING FACES FRON IMAGE......";
-            label7.Visible = false;
             // 
             // Form1
             // 

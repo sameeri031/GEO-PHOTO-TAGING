@@ -173,9 +173,11 @@ namespace Task1
                 }
                 else
                 {
-                    MessageBox.Show("UPLOADING IT WILL TAKE YOUR FEW SECONDS");
-                    auto = true;
-                    await AutoUploadAllAsync(); // automatic path
+                    var f = new AUTOUPLOAD(selectedImages);
+                    f.Show();
+                    //MessageBox.Show("UPLOADING IT WILL TAKE YOUR FEW SECONDS");
+                    //auto = true;
+                    //await AutoUploadAllAsync(); // automatic path
                 }
             }
         }
@@ -219,81 +221,81 @@ namespace Task1
 
             DUP = false; // reset flag for this photo
         }
-        private async Task AutoUploadAllAsync()
-        {
-            var uploadTasks = selectedImages.Select(imagePath => UploadSinglePhotoAsync(imagePath)).ToList();
-            await Task.WhenAll(uploadTasks);
+        //private async Task AutoUploadAllAsync()
+        //{
+        //    var uploadTasks = selectedImages.Select(imagePath => UploadSinglePhotoAsync(imagePath)).ToList();
+        //    await Task.WhenAll(uploadTasks);
 
-            // MessageBox.Show(" All photos auto-uploaded successfully!");
-        }
-        private static readonly HttpClient client = new HttpClient();
-
-        private async Task UploadSinglePhotoAsync(string imagePath)
-        {
-            using (var client = new HttpClient())
-            {
-                using (var form = new MultipartFormDataContent())
-                {
-                    var imageContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
-                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-                    form.Add(imageContent, "file", Path.GetFileName(imagePath));
-                    string title = Path.GetFileNameWithoutExtension(imagePath);
-                    form.Add(new StringContent(title), "title");
-
-                    var response = await client.PostAsync("http://127.0.0.1:8000/DUPLICATE", form);
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    dynamic result = JsonConvert.DeserializeObject(jsonString);
-                    DUP = result.duplicate;
-
-                    if (!DUP)
-                    {
-                        using (var formupload = new MultipartFormDataContent())
-                        {
-
-                            string titleT = Path.GetFileNameWithoutExtension(imagePath);
-                            string date;
-                            if (auto)
-                                date = File.GetCreationTime(imagePath).ToString("yyyy-MM-dd");
-                            else
-                                date = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-                            string path = "C:\\Users\\Dogesh\\Desktop\\PHOTO_SERVER\\" + Path.GetFileName(imagePath);
-                            var fileBytes = await File.ReadAllBytesAsync(imagePath);
-                            var fileContent = new ByteArrayContent(fileBytes);
-                            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-                            formupload.Add(fileContent, "file", Path.GetFileName(imagePath));
-
-                            var metadata = new { Person = "", Event = "", Location = "", Date = File.GetCreationTime(imagePath).ToString("yyyy-MM-dd") };
-                            // ✅ Correct: Allow default Content-Type for form string (will be text/plain)
-                            formupload.Add(new StringContent(JsonConvert.SerializeObject(metadata)), "metadata");
-                            formupload.Add(new StringContent(titleT), "title");
-                            formupload.Add(new StringContent(date), "date");
-                            formupload.Add(new StringContent(path), "path");
-
-                            try
-                            {
-                                var responseupload = await client.PostAsync("http://127.0.0.1:8000/upload_photo_MODEL", formupload);
-                                responseupload.EnsureSuccessStatusCode();
-                                Console.WriteLine($"✅ Uploaded {Path.GetFileName(imagePath)}");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"⚠️ Error uploading {Path.GetFileName(imagePath)}: {ex.Message}");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"⚠️ Skipping {Path.GetFileName(imgpath)} — already on server.");
-
-
-                    }
-
-                }
-            }
-
-        }
+        //    // MessageBox.Show(" All photos auto-uploaded successfully!");
+        //}
+        //private static readonly HttpClient client = new HttpClient();
 
         //private async Task UploadSinglePhotoAsync(string imagePath)
+        //{
+        //    using (var client = new HttpClient())
+        //    {
+        //        using (var form = new MultipartFormDataContent())
+        //        {
+        //            var imageContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+        //            imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+        //            form.Add(imageContent, "file", Path.GetFileName(imagePath));
+        //            string title = Path.GetFileNameWithoutExtension(imagePath);
+        //            form.Add(new StringContent(title), "title");
+
+        //            var response = await client.PostAsync("http://127.0.0.1:8000/DUPLICATE", form);
+        //            var jsonString = await response.Content.ReadAsStringAsync();
+        //            dynamic result = JsonConvert.DeserializeObject(jsonString);
+        //            DUP = result.duplicate;
+
+        //            if (!DUP)
+        //            {
+        //                using (var formupload = new MultipartFormDataContent())
+        //                {
+
+        //                    string titleT = Path.GetFileNameWithoutExtension(imagePath);
+        //                    string date;
+        //                    if (auto)
+        //                        date = File.GetCreationTime(imagePath).ToString("yyyy-MM-dd");
+        //                    else
+        //                        date = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+        //                    string path = "C:\\Users\\Dogesh\\Desktop\\PHOTO_SERVER\\" + Path.GetFileName(imagePath);
+        //                    var fileBytes = await File.ReadAllBytesAsync(imagePath);
+        //                    var fileContent = new ByteArrayContent(fileBytes);
+        //                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+        //                    formupload.Add(fileContent, "file", Path.GetFileName(imagePath));
+
+        //                    var metadata = new { Person = "", Event = "", Location = "", Date = File.GetCreationTime(imagePath).ToString("yyyy-MM-dd") };
+        //                    // ✅ Correct: Allow default Content-Type for form string (will be text/plain)
+        //                    formupload.Add(new StringContent(JsonConvert.SerializeObject(metadata)), "metadata");
+        //                    formupload.Add(new StringContent(titleT), "title");
+        //                    formupload.Add(new StringContent(date), "date");
+        //                    formupload.Add(new StringContent(path), "path");
+
+        //                    try
+        //                    {
+        //                        var responseupload = await client.PostAsync("http://127.0.0.1:8000/upload_photo_MODEL", formupload);
+        //                        responseupload.EnsureSuccessStatusCode();
+        //                        Console.WriteLine($"✅ Uploaded {Path.GetFileName(imagePath)}");
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        Console.WriteLine($"⚠️ Error uploading {Path.GetFileName(imagePath)}: {ex.Message}");
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show($"⚠️ Skipping {Path.GetFileName(imgpath)} — already on server.");
+
+
+        //            }
+
+        //        }
+        //    }
+
+        //}
+
+        ////private async Task UploadSinglePhotoAsync(string imagePath)
         //{
         //    using (var client = new HttpClient())
         //    using (var form = new MultipartFormDataContent())

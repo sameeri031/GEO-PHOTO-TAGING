@@ -20,6 +20,7 @@ namespace Task1
     public partial class ALBUM : Form
     {
         bool groupByMonth = true;
+        bool isLoaded = false;
 
         private List<string> allImages = new List<string>();
         private Dictionary<string, dynamic> metadataCache = new();
@@ -37,6 +38,8 @@ namespace Task1
         {
             try
             {
+                if (isLoaded) return;
+                isLoaded = true;
                 allImages = await GetServerImagesAsync();
                 LoadPeopleGroups();
             }
@@ -367,7 +370,7 @@ namespace Task1
         {
             try
             {
-               
+
 
                 // 1️⃣ Reload all image filenames from server
                 allImages = await GetServerImagesAsync();
@@ -413,7 +416,7 @@ namespace Task1
 
                 // 3️⃣ Optionally refresh current albums UI
                 MessageBox.Show("✅ Metadata successfully updated from server!");
-                
+
 
                 // optional: reload albums automatically
                 await LoadAlbumsAsync("People", meta => (string)meta.Person ?? "");
@@ -421,11 +424,11 @@ namespace Task1
             catch (Exception ex)
             {
                 MessageBox.Show("Error refreshing metadata: " + ex.Message);
-               
+
             }
             finally
             {
-              
+
             }
         }
 

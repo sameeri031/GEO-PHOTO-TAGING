@@ -106,3 +106,4 @@ C:\Users\Dogesh\Desktop\SERVER\Task1\Task1\obj\Debug\net8.0-windows\refint\Task1
 C:\Users\Dogesh\Desktop\SERVER\Task1\Task1\obj\Debug\net8.0-windows\Task1.pdb
 C:\Users\Dogesh\Desktop\SERVER\Task1\Task1\obj\Debug\net8.0-windows\Task1.genruntimeconfig.cache
 C:\Users\Dogesh\Desktop\SERVER\Task1\Task1\obj\Debug\net8.0-windows\ref\Task1.dll
+C:\Users\Dogesh\Desktop\SERVER\Task1\Task1\obj\Debug\net8.0-windows\Task1.AUTOUPLOAD.resources
